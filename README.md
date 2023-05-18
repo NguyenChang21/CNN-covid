@@ -133,20 +133,25 @@ In ra confusion matrix:
 
 <img width="721" alt="image" src="https://github.com/NguyenChang21/CNN-covid/assets/95021543/cb8fc1ad-0704-45a1-8acc-1acc7c1fbea2">
 
-In ra các ảnh X_ray tương ứng cùng với nhãn dự đoán và nhãn thực tế:
-- `import matplotlib.pyplot as plt`: Nhập thư viện `matplotlib.pyplot` để hiển thị ảnh và kết quả dự đoán.
-- `def show_image_with_prediction(image_array, prediction, label)`: Định nghĩa hàm `show_image_with_prediction` nhận đầu vào là mảng ảnh `image_array`, kết quả dự đoán `prediction` và nhãn thực tế `label`.
-- `plt.imshow(image_array)`: Hiển thị ảnh từ mảng `image_array`.
-- `plt.axis('off')`: Tắt hiển thị các trục.
-- `plt.title(f'Prediction: {prediction}, Label: {label}')`: Đặt tiêu đề cho ảnh, gồm kết quả dự đoán và nhãn thực tế.
-- `plt.show()`: Hiển thị ảnh và tiêu đề.
-- `image_arrays = X_test`: Gán mảng các ảnh kiểm tra vào biến `image_arrays`.
-- `predictions = result`: Gán mảng các kết quả dự đoán vào biến `predictions`.
-- `label = real_result`: Gán mảng các nhãn thực tế vào biến `label`.
-- `for image_array, prediction, label in zip(image_arrays, predictions, label):`: Lặp qua từng cặp ảnh, kết quả dự đoán và nhãn thực tế.
-- `show_image_with_prediction(image_array/255, prediction, label)`: Gọi hàm `show_image_with_prediction` để hiển thị ảnh và kết quả dự đoán.
+# Hướng dẫn sử dụng model đã lưu dự đoán ảnh
+# Bước 1: Import ảnh và xử lý dữ liệu ảnh cần chẩn đoán
+Các bước import và xử lý dữ liệu tương tự như xử lý dữ liệu huấn luyện model ở bước 2
 
-<img width="839" alt="image" src="https://github.com/NguyenChang21/CNN-covid/assets/95021543/cd41a529-3bd7-42ac-82df-2f2c67a794f7">
+<img width="744" alt="image" src="https://github.com/NguyenChang21/CNN-covid/assets/95021543/36fba5ec-8447-43c5-b618-8695058beb63">
+Sau khi thu thập các mảng ảnh đầu vào trong danh sách `X_input`, bạn sử dụng `np.array()` để chuyển đổi danh sách này thành một mảng numpy có tên là `X_input`. Tiếp theo, tiến hành chuẩn hóa dữ liệu bằng cách chia các giá trị trong mảng `X_input` cho 255.
+Sau đó, sử dụng hàm `load_model()` để tải mô hình đã được lưu trữ. Mô hình được tải được gán cho biến `model1`.
+Tiếp theo, sử dụng mô hình `model1` để dự đoán nhãn của các mảng ảnh đầu vào `X_input` bằng cách sử dụng `model1.predict(X_input)`. Kết quả dự đoán được lưu vào biến `y_hat`.
+Cuối cùng, sử dụng hàm `predict()` để áp dụng ngưỡng 0.5 cho kết quả dự đoán `y_hat` và lưu kết quả vào biến `y_pred`.
+
+<img width="722" alt="image" src="https://github.com/NguyenChang21/CNN-covid/assets/95021543/0b264727-326d-45c1-a925-da909fb26238">
+
+Tạo một vòng lặp để xử lý kết quả dự đoán `y_pred`. Nếu giá trị của `y_pred` bằng 0, bạn thêm chuỗi `'Normal'` vào danh sách `result_pred`. Ngược lại, nếu giá trị của `y_pred` bằng 1, bạn thêm chuỗi `'Covid'` vào danh sách `result_pred`. Kết quả cuối cùng là danh sách `result_pred` chứa các nhãn dự đoán tương ứng với từng mảng ảnh đầu vào trong `X_input`.
+
+<img width="721" alt="image" src="https://github.com/NguyenChang21/CNN-covid/assets/95021543/c8cfa40d-7988-48f2-8f51-443d518dd2ff">
+
+Tạo một thư mục `images` trong thư mục `/kaggle/working` nếu nó chưa tồn tại. Sau đó, lặp qua từng ảnh và dự đoán tương ứng, tạo tên file `filename` dựa trên chỉ số và dự đoán, và tạo đường dẫn đầy đủ `file_path`. Cuối cùng, lưu ảnh hiện tại vào đường dẫn `file_path` bằng cách sử dụng `plt.savefig(file_path)`.
+
+<img width="771" alt="image" src="https://github.com/NguyenChang21/CNN-covid/assets/95021543/6f6551fe-e715-4563-bafb-6cea53a1f670">
 
 
 
