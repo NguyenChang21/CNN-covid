@@ -103,8 +103,15 @@ Load model đã lưu:
 - `from sklearn.metrics import accuracy_score`: Nhập hàm `accuracy_score` từ thư viện `sklearn.metrics` để tính toán độ chính xác.
 - `accuracy = accuracy_score(y_test, y_pred)`: Tính toán độ chính xác bằng cách so sánh nhãn thực tế `y_test` với nhãn dự đoán `y_pred` và lưu kết quả vào biến `accuracy`.
 - `print(accuracy)`: In ra giá trị độ chính xác trên tập kiểm tra.
+- result = [] và real_result = []: Khởi tạo danh sách rỗng để lưu trữ nhãn ('Normal' hoặc 'Covid') cho các giá trị dự đoán và giá trị thực tế, tương ứng.
+for i in y_pred:: Lặp qua từng giá trị dự đoán.
+Bên trong vòng lặp:
+Nếu i là 0, thêm 'Normal' vào danh sách result.
+Nếu i là 1, thêm 'Covid' vào danh sách result.
+Thực hiện cùng các thao tác để điền thông tin vào danh sách real_result dựa trên giá trị thực tế.
+Danh sách result và real_result sau đó sẽ chứa các nhãn ('Normal' hoặc 'Covid') tương ứng với các giá trị dự đoán và giá trị thực tế.
 
-<img width="821" alt="image" src="https://github.com/NguyenChang21/CNN-covid/assets/95021543/5086d039-9b8d-4e9c-851d-92ae3b7f6252">
+<img width="393" alt="image" src="https://github.com/NguyenChang21/CNN-covid/assets/95021543/f9941f33-d16c-41a1-a76e-dcd5bd1aa5d0">
 
 In ra classification report và accuracy của mô hình
 - `from sklearn.metrics import confusion_matrix, classification_report, accuracy_score`: Nhập các hàm `confusion_matrix`, `classification_report`, `accuracy_score` từ thư viện `sklearn.metrics`.
@@ -128,6 +135,22 @@ In ra confusion matrix:
 - `plt.show()`: Hiển thị biểu đồ ma trận nhầm lẫn.
 
 <img width="721" alt="image" src="https://github.com/NguyenChang21/CNN-covid/assets/95021543/cb8fc1ad-0704-45a1-8acc-1acc7c1fbea2">
+
+In ra ảnh dự đoán trên tập test cùng label:
+`def show_image_with_prediction(image_array, prediction, label)`: Định nghĩa một hàm `show_image_with_prediction` nhận đầu vào là một mảng ảnh (`image_array`), nhãn dự đoán (`prediction`), và nhãn thực tế (`label`).
+Bên trong hàm `show_image_with_prediction`:
+   - `plt.imshow(image_array)`: Hiển thị ảnh từ mảng ảnh (`image_array`).
+   - `plt.axis('off')`: Tắt hiển thị các trục.
+   - `plt.title(f'Prediction: {prediction}, Label: {label}')`: Đặt tiêu đề cho ảnh với thông tin về nhãn dự đoán và nhãn thực tế.
+   - `plt.show()`: Hiển thị ảnh.
+`image_arrays = X_test`, `predictions = result`, `label = real_result`: Gán các giá trị tương ứng từ `X_test`, `result`, và `real_result` cho các biến tương ứng.
+Vòng lặp `for image_array, prediction, label in zip(image_arrays, predictions, label):`: Lặp qua từng ảnh, nhãn dự đoán và nhãn thực tế.
+Bên trong vòng lặp:
+   - Gọi hàm `show_image_with_prediction` để hiển thị ảnh từ mảng ảnh (`image_array/255`) cùng với nhãn dự đoán (`prediction`) và nhãn thực tế (`label`).
+
+Kết quả là các ảnh được hiển thị với nhãn dự đoán và nhãn thực tế tương ứng.
+
+<img width="538" alt="image" src="https://github.com/NguyenChang21/CNN-covid/assets/95021543/55fb172f-8e55-4d2b-afba-666208c55cb9">
 
 # Hướng dẫn sử dụng model đã lưu dự đoán ảnh
 # Bước 1: Import ảnh và xử lý dữ liệu ảnh cần chẩn đoán
