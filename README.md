@@ -106,10 +106,6 @@ Load model đã lưu:
 
 <img width="821" alt="image" src="https://github.com/NguyenChang21/CNN-covid/assets/95021543/5086d039-9b8d-4e9c-851d-92ae3b7f6252">
 
-Gán nhãn cho giá trị y_pred và y_test lần lượt vào các tập result và real_result để in ra kết quả
-
-<img width="814" alt="image" src="https://github.com/NguyenChang21/CNN-covid/assets/95021543/0d9cf848-c54b-4d01-8c75-8954205e4a0e">
-
 In ra classification report và accuracy của mô hình
 - `from sklearn.metrics import confusion_matrix, classification_report, accuracy_score`: Nhập các hàm `confusion_matrix`, `classification_report`, `accuracy_score` từ thư viện `sklearn.metrics`.
 - `labels = ['Covid', 'Normal']`: Định nghĩa nhãn cho các lớp dự đoán.
