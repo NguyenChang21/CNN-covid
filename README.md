@@ -23,15 +23,23 @@
 - `X` là danh sách lưu trữ các mảng numpy biểu diễn ảnh.
 - `y` là danh sách lưu trữ các nhãn tương ứng với từng ảnh.
 Trong vòng lặp, đối với mỗi đường dẫn trong `name_list`, nhãn được thêm vào danh sách `y` (ở đây là nhãn 1 tương ứng với nhãn "Covid"). Ảnh được đọc bằng `cv2.imread()` và chuyển đổi thành mảng numpy bằng `tf.keras.preprocessing.image.img_to_array()`. Sau đó, ảnh được điều chỉnh kích thước thành (128, 128) bằng `cv2.resize()`. Cuối cùng, mảng ảnh được thêm vào danh sách `X`.
+
  <img width="811" alt="image" src="https://github.com/NguyenChang21/CNN-covid/assets/95021543/016972e7-862e-4f59-b1cb-c64f58bd7db4">
+	
 Lặp lại tương tự với list normal, thay nhãn =0 tương ứng với nhãn "Normal"
+
 <img width="818" alt="image" src="https://github.com/NguyenChang21/CNN-covid/assets/95021543/4beb4ed1-4f44-4ab4-a002-fb2079390036">
+
 Sau đó, chúng ta chuyển đổi X và y thành dạng array:
 - `X` là danh sách các mảng numpy biểu diễn ảnh. Bằng cách sử dụng `np.array(X)`, danh sách này được chuyển đổi thành một mảng numpy đa chiều.
 - `y` là danh sách các nhãn tương ứng với từng ảnh. Bằng cách sử dụng `np.array(y)`, danh sách này được chuyển đổi thành một mảng numpy 1 chiều. Hàm `reshape(-1, 1)` được sử dụng để thay đổi hình dạng của mảng từ (n,) thành (n, 1), để đảm bảo rằng mảng `y` có kích thước chính xác và phù hợp với dữ liệu đầu vào của mô hình.
+- 
 <img width="642" alt="image" src="https://github.com/NguyenChang21/CNN-covid/assets/95021543/eb51891f-ab08-425e-bc65-d0922cc1c49b">
+
 In ra X shape và y shape để kiểm tra:
+
 <img width="644" alt="image" src="https://github.com/NguyenChang21/CNN-covid/assets/95021543/4fbbb7b9-d8f0-4301-af48-cdc85fd15a7d">
+
 Chia tập train, test, validation(val) phục vụ cho việc huấn luyện mô hình, sử dụng hàm train_test_split(X, y, test_size =0.2, random_state=42), với test_size là tỉ lệ của tập test trên toàn bộ đầu vào X, y, random_state được sử dụng để đảm bảo rằng quá trình chia dữ liệu này là nhất quán khi chạy lại chương trình. Sau khi chia, chúng ta có được các tập train, test và val. In ra shape của các tập để kiểm tra.
 <img width="684" alt="image" src="https://github.com/NguyenChang21/CNN-covid/assets/95021543/3fbb98e0-077f-4702-9102-94a940677e7a">
 Tiếp đó, chúng ta chuẩn hóa dữ liệu đầu vào. Việc chuẩn hóa dữ liệu đóng vai trò quan trọng trong việc cải thiện hiệu suất và ổn định của các thuật toán máy học và học sâu. Nó giúp đưa dữ liệu về cùng một phạm vi giá trị, tăng tốc quá trình học, giảm nhiễu và đảm bảo tính công bằng giữa các đặc trưng.
